@@ -13,8 +13,10 @@ public class HibernateVendorProxyAdapter implements VendorProxyAdapter {
 
     private Object value;
     private Class<?> clazz;
+    private String fieldName;
 
-    public HibernateVendorProxyAdapter(Object object, Field field) {
+    public HibernateVendorProxyAdapter(Object object, Field field, String fieldName) {
+        this.fieldName = fieldName;
         if (object != null) {
             if (object instanceof HibernateProxy) {
                 HibernateProxy proxy = (HibernateProxy) object;
@@ -43,5 +45,10 @@ public class HibernateVendorProxyAdapter implements VendorProxyAdapter {
     @Override
     public Object getValue() {
         return value;
+    }
+
+    @Override
+    public String getFieldName() {
+        return fieldName;
     }
 }
